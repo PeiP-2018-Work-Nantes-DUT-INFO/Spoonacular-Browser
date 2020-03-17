@@ -1,4 +1,4 @@
-package com.example.spoonacular_browser;
+package com.simoncorp.spoonacular_browser;
 
 import androidx.appcompat.app.AppCompatActivity;
 

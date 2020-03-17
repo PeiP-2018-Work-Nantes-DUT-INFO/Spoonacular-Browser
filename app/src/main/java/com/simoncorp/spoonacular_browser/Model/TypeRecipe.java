@@ -1,6 +1,9 @@
-package com.example.spoonacular_browser;
+package com.simoncorp.spoonacular_browser.Model;
 
-public class TypeRecipe {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class TypeRecipe implements Parcelable {
     private String nameOfRecipe;
     private int numberOfRecipe;
     private String genreOfRecip;
@@ -11,6 +14,24 @@ public class TypeRecipe {
         this.genreOfRecip = genreOfRecip;
     }
 
+
+    protected TypeRecipe(Parcel in) {
+        nameOfRecipe = in.readString();
+        numberOfRecipe = in.readInt();
+        genreOfRecip = in.readString();
+    }
+
+    public static final Creator<TypeRecipe> CREATOR = new Creator<TypeRecipe>() {
+        @Override
+        public TypeRecipe createFromParcel(Parcel in) {
+            return new TypeRecipe(in);
+        }
+
+        @Override
+        public TypeRecipe[] newArray(int size) {
+            return new TypeRecipe[size];
+        }
+    };
 
     public String getNameOfRecipe() {
         return nameOfRecipe;
@@ -43,5 +64,17 @@ public class TypeRecipe {
                 ", numberOfRecipe=" + numberOfRecipe +
                 ", genreOfRecip='" + genreOfRecip + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nameOfRecipe);
+        dest.writeInt(numberOfRecipe);
+        dest.writeString(genreOfRecip);
     }
 }

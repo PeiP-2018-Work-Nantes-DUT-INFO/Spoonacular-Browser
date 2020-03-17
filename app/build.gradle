@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.1"
 
     defaultConfig {
-        applicationId "com.example.spoonacular_browser"
+        applicationId 'com.simoncorp.spoonacular_browser'
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1

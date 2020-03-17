@@ -1,13 +1,16 @@
-package com.example.spoonacular_browser;
+package com.simoncorp.spoonacular_browser;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+
+import com.simoncorp.spoonacular_browser.Model.TypeRecipe;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
                 TypeRecipe typeRecipe = new TypeRecipe(nameOfRecipe,numberOfRecipe,genreOfRecipe);
 
-
+                Intent goToResult = new Intent(MainActivity.this, ResultActvity.class);
+                goToResult.putExtra("request", typeRecipe);
+                startActivity(goToResult);
 
             }
         });

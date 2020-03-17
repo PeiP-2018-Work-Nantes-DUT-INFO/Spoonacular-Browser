@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.spoonacular_browser">
+    package="com.simoncorp.spoonacular_browser">
 
     <application
         android:allowBackup="true"
@@ -10,9 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DisplayRecipeActivity" />
-        <activity android:name=".ResultActvity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.simoncorp.spoonacular_browser.DisplayRecipeActivity" />
+        <activity android:name="com.simoncorp.spoonacular_browser.ResultActvity" />
+        <activity android:name="com.simoncorp.spoonacular_browser.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
