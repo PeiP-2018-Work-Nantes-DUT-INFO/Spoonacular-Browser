@@ -12,6 +12,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "SPOONACULAR_APIKEY", SPOONACULAR_BROWSER_SPOONACULAR_API_KEY)
+
     }
 
     buildTypes {
@@ -21,7 +24,6 @@ android {
         }
     }
 
-    buildConfigField("String", "SPOONACULAR_BROWSER_SPOONACULAR_API_KEY", API_KEY)
 
 }
 
