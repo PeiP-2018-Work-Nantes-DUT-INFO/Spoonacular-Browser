@@ -7,12 +7,70 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/namepage"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/nameRecipe"
+        android:layout_width="222dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="152dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/search_input_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.783"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/namepage" />
+
+    <Spinner
+        android:id="@+id/genre"
+        android:layout_width="214dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toEndOf="@+id/recipeStyleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/nameRecipe" />
+
+    <TextView
+        android:id="@+id/recipeStyleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="72dp"
+        android:text="@string/recipeStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameRecipe" />
+
+    <SeekBar
+        android:id="@+id/numberRecette"
+        android:layout_width="232dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toEndOf="@+id/numberOfResultsTextView"
+        app:layout_constraintTop_toBottomOf="@+id/genre" />
+
+    <TextView
+        android:id="@+id/numberOfResultsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/numberOfResultsText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipeStyleTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

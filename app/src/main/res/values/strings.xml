@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Spoonacular-Browser</string>
+    <string name="result_activity_title">Results</string>
+    <string name="recipe_title">Simple Frieds Eggs</string>
+    <string name="recipeStyle">Recipe Type</string>
+    <string name="recipeImageContentDescription">This is the default recipe image. Miam, that\'s looking good !</string>
+    <string name="recipeTextSimple">This is a simple recipe !</string>
+    <string name="numberOfResultsText">Number</string>
+    <string name="search_input_hint" >Search</string>
+    <string name="Time">25</string>
+    <string name="description">Recipe Description</string>
 </resources>

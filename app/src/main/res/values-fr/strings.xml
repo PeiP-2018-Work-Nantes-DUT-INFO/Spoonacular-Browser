@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Spoonacular-Browser</string>
+    <string name="result_activity_title">Résultats</string>
+    <string name="recipe_title">Oeux fris</string>
+    <string name="recipeStyle">Genre</string>
+    <string name="search_input_hint">Recherche</string>
+    <string name="recipeImageContentDescription">Ceci est un exemple d\'image</string>
+    <string name="recipeTextSimple">Ceci est une simple recette !</string>
+    <string name="numberOfResultsText">Nombre</string>
+    <string name="description">Description</string>
+    <string name="Time">25</string>
+</resources>
