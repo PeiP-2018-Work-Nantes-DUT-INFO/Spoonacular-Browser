@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
                 String nameOfRecipe = nameRecipe.getText().toString();
                 int numberOfRecipe = numberRecipe.getProgress();
                 String genreOfRevipe = genre.getTransitionName();
+
+                //
             }
         });
     }
