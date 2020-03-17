@@ -1,7 +1,9 @@
-package com.simoncorp.spoonacular_browser.Model;
+package com.simoncorp.spoonacular_browser.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 
 public class TypeRecipe implements Parcelable {
     private String nameOfRecipe;
@@ -15,7 +17,7 @@ public class TypeRecipe implements Parcelable {
     }
 
 
-    protected TypeRecipe(Parcel in) {
+    private TypeRecipe(Parcel in) {
         nameOfRecipe = in.readString();
         numberOfRecipe = in.readInt();
         genreOfRecip = in.readString();
@@ -58,6 +60,7 @@ public class TypeRecipe implements Parcelable {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return "TypeRecipe{" +
                 "nameOfRecipe='" + nameOfRecipe + '\'' +
