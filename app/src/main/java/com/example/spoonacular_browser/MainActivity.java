@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String nameOfRecipe = nameRecipe.getText().toString();
                 int numberOfRecipe = numberRecipe.getProgress();
-                String genreOfRevipe = genre.;
+                String genreOfRevipe = genre.getTransitionName();
             }
         });
     }
