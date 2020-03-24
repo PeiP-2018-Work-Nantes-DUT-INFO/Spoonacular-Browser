@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String nameOfRecipe = autocomplete.getText().toString();
                 int numberOfRecipe = numberRecipe.getProgress();
-                String genreOfRecipe = genre.getTransitionName();
+                String genreOfRecipe = genre.getSelectedItem().toString();
 
                 TypeRecipe typeRecipe = new TypeRecipe(nameOfRecipe, numberOfRecipe, genreOfRecipe);
 
