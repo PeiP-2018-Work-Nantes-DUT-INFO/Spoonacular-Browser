@@ -49,6 +49,7 @@ public class DisplayRecipeActivity extends AppCompatActivity {
                     if (recipe == null) {
                         Toast.makeText(DisplayRecipeActivity.this,
                                 response.raw().toString(), Toast.LENGTH_LONG).show();
+                        return;
                     }
                     Picasso.get().load(String.format("https://spoonacular.com/recipeImages/%d-636x393.jpg",
                             recipe.getId())).into(recipeImage);
