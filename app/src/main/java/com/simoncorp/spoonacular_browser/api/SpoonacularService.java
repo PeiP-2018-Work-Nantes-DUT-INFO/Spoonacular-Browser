@@ -13,7 +13,7 @@ public interface SpoonacularService {
     @GET("/recipes/search")
     Call<SearchResults> searchRecipes(@Query("query") String query, @Query("cuisine") String cuisine,
                            @Nullable @Query("offset") Integer offset,
-                           @Nullable @Query("limit") Integer limit);
+                           @Nullable @Query("number") Integer limit);
     @GET("/recipes/autocomplete")
     Call<List<AutocompleteResult>> searchRecipesAutocomplete(@Query("query") String query,
                                                              @Nullable @Query("limit") Integer limit);
