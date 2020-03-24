@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.simoncorp.spoonacular_browser.api.AutocompleteResult;
@@ -80,14 +81,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         final Spinner genre = findViewById(R.id.genre);
+        final TextView valueOfSeekBar = findViewById(R.id.valueOfSeekBar);
         final SeekBar numberRecipe = findViewById(R.id.numberRecipe);
+        numberRecipe.setMax(99);
+        numberRecipe.setProgress(9);
+
+        numberRecipe.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                valueOfSeekBar.setText(String.valueOf(numberRecipe.getProgress() + 1));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
         Button searchButton = findViewById(R.id.seearchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String nameOfRecipe = autocomplete.getText().toString();
-                int numberOfRecipe = numberRecipe.getProgress();
+                int numberOfRecipe = numberRecipe.getProgress() + 1 ;
                 String genreOfRecipe = genre.getSelectedItem().toString();
 
                 TypeRecipe typeRecipe = new TypeRecipe(nameOfRecipe, numberOfRecipe, genreOfRecipe);

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.simoncorp.spoonacular_browser.api.Result;
@@ -66,6 +67,8 @@ public class ResultActvity extends AppCompatActivity {
     }
 
     private void loadNextDataFromApi(final int offset) {
+        final ProgressBar progress = findViewById(R.id.progressBar);
+        progress.setVisibility(View.VISIBLE);
         service.searchRecipes(query.getNameOfRecipe(),
                 query.getGenreOfRecip(),
                 offset,
@@ -74,11 +77,15 @@ public class ResultActvity extends AppCompatActivity {
                     @Override
                     @EverythingIsNonNull
                     public void onResponse(Call<SearchResults> call, Response<SearchResults> response) {
+                        progress.setVisibility(View.INVISIBLE);
                         Toast.makeText(ResultActvity.this,
                                 String.valueOf(offset),
                                 Toast.LENGTH_SHORT).show();
                         if(response.body() != null) {
                             resultAdapter.addAll(response.body().getResults());
+                        } else {
+                            Toast.makeText(ResultActvity.this, response.raw().toString(),
+                                    Toast.LENGTH_LONG).show();
                         }
                     }
 
