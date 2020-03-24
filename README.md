@@ -4,4 +4,5 @@ Cloner le projet.
 
 Copier coller le fichier gradle.properties.example en gradle.properties à la racine
 
-Modifier l'API KEY de spoonacular dans gradle.properties
+Insérer votre clé api dans le fichier gradle.properties en remplaçant "API_KEY"
+(il faut laisser les guillemmets)
