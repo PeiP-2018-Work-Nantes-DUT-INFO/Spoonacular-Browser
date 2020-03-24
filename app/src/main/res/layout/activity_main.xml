@@ -23,13 +23,13 @@
         android:id="@+id/nameRecipe"
         android:layout_width="222dp"
         android:layout_height="44dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="48dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/search_input_hint"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.783"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/namepage" />
 
