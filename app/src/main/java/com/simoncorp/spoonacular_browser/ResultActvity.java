@@ -78,11 +78,11 @@ public class ResultActvity extends AppCompatActivity {
                     @EverythingIsNonNull
                     public void onResponse(Call<SearchResults> call, Response<SearchResults> response) {
                         progress.setVisibility(View.INVISIBLE);
-                        Toast.makeText(ResultActvity.this,
-                                String.valueOf(offset),
-                                Toast.LENGTH_SHORT).show();
                         if(response.body() != null) {
                             resultAdapter.addAll(response.body().getResults());
+                            Toast.makeText(ResultActvity.this,
+                                    String.valueOf(resultAdapter.getCount()),
+                                    Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ResultActvity.this, response.raw().toString(),
                                     Toast.LENGTH_LONG).show();
