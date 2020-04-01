@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -35,6 +37,10 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         setContentView(R.layout.activity_result_activity);
         service = RetrofitClientInstance.getRetrofitInstance()
                 .create(SpoonacularService.class);
@@ -61,7 +67,8 @@ public class ResultActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Result recipe = resultAdapter.getItem(position);
                 progress.setVisibility(View.VISIBLE);
-
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 service.getRecipeInformation(recipe.getId())
                         .enqueue(new Callback<RecipeInformation>() {
                             @SuppressLint("DefaultLocale")
@@ -69,6 +76,7 @@ public class ResultActivity extends AppCompatActivity {
                             public void onResponse(Call<RecipeInformation> call,
                                                    Response<RecipeInformation> response) {
                                 progress.setVisibility(View.INVISIBLE);
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                                 RecipeInformation recipe = response.body();
                                 if (recipe == null) {
                                     Toast.makeText(ResultActivity.this,
@@ -119,7 +127,6 @@ public class ResultActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(ResultActivity.this, response.raw().toString(),
                                     Toast.LENGTH_LONG).show();
-                            finish();
                         }
                     }
 
@@ -130,5 +137,13 @@ public class ResultActivity extends AppCompatActivity {
                                 "Something bad happened", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

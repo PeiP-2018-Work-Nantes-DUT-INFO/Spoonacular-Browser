@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,8 +16,6 @@ import com.simoncorp.spoonacular_browser.StringItemList.StringItem;
 import com.simoncorp.spoonacular_browser.api.AnalyzedInstruction;
 import com.simoncorp.spoonacular_browser.api.ExtendedIngredient;
 import com.simoncorp.spoonacular_browser.api.RecipeInformation;
-import com.simoncorp.spoonacular_browser.api.RetrofitClientInstance;
-import com.simoncorp.spoonacular_browser.api.SpoonacularService;
 import com.simoncorp.spoonacular_browser.api.Step;
 import com.squareup.picasso.Picasso;
 
@@ -32,9 +31,11 @@ public class DisplayRecipeActivity extends AppCompatActivity implements Ingredie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_recipe);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         final ImageView recipeImage = findViewById(R.id.recipeImage);
         final TextView recipeTitle = findViewById(R.id.recipeTitle);
-        final TextView recipeSteps = findViewById(R.id.stepsTextView);
         final ViewPager viewPager = findViewById(R.id.viewPager);
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
@@ -47,8 +48,6 @@ public class DisplayRecipeActivity extends AppCompatActivity implements Ingredie
             Picasso.get().load(String.format("https://spoonacular.com/recipeImages/%d-636x393.jpg",
                     recipe.getId())).into(recipeImage);
             recipeTitle.setText(recipe.getTitle());
-            recipeSteps.setText(recipe.getInstructions());
-
 
             adapter.addFragment(IngredientItemFragment.newInstance(1,
                     getInformationItems(recipe)),
@@ -151,5 +150,13 @@ public class DisplayRecipeActivity extends AppCompatActivity implements Ingredie
             }
         }
         return stepsItems;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
