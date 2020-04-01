@@ -30,4 +30,9 @@
     <string name="tab_title_ingredients">Ingrédients</string>
     <string name="tab_title_steps">Instructions</string>
     <string name="info_no_instructions">Pas d\'instructions, malheureusement ...</string>
+    <string name="limit_license">Limiter la licence</string>
+    <string name="exclude_ingredients">Entrez ici les ingrédients à exclure</string>
+    <string name="intolerances">Entrez ici vos intolérances</string>
+    <string name="search_diet">Régime de diet</string>
+    <string name="instructions_required">Contient instructions</string>
 </resources>

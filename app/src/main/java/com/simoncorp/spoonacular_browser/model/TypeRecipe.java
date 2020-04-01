@@ -9,18 +9,59 @@ public class TypeRecipe implements Parcelable {
     private String nameOfRecipe;
     private int numberOfRecipe;
     private String genreOfRecip;
+    private String diet;
 
-    public TypeRecipe(String nameOfRecipe, int numberOfRecipe, String genreOfRecip) {
+    private String intolerancesPayload;
+    private String ingredientsExcludePayload;
+    private boolean limitLicense = false;
+    private boolean includeInstructions = false;
+
+
+    public TypeRecipe(String nameOfRecipe,
+                      int numberOfRecipe,
+                      String genreOfRecip,
+                      String diet,
+                      String intolerances,
+                      String ingredientsExclude,
+                      boolean limitLicense,
+                      boolean includeInstructions) {
         this.nameOfRecipe = nameOfRecipe;
         this.numberOfRecipe = numberOfRecipe;
         this.genreOfRecip = genreOfRecip;
+        this.diet = diet;
+        this.intolerancesPayload = intolerances;
+        this.ingredientsExcludePayload = ingredientsExclude;
+        this.limitLicense = limitLicense;
+        this.includeInstructions = includeInstructions;
     }
 
 
-    private TypeRecipe(Parcel in) {
+    protected TypeRecipe(Parcel in) {
         nameOfRecipe = in.readString();
         numberOfRecipe = in.readInt();
         genreOfRecip = in.readString();
+        diet = in.readString();
+        intolerancesPayload = in.readString();
+        ingredientsExcludePayload = in.readString();
+        limitLicense = in.readByte() != 0;
+        includeInstructions = in.readByte() != 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nameOfRecipe);
+        dest.writeInt(numberOfRecipe);
+        dest.writeString(genreOfRecip);
+        dest.writeString(diet);
+        dest.writeString(intolerancesPayload);
+        dest.writeString(ingredientsExcludePayload);
+        dest.writeByte((byte) (limitLicense ? 1 : 0));
+        dest.writeByte((byte) (includeInstructions ? 1 : 0));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<TypeRecipe> CREATOR = new Creator<TypeRecipe>() {
@@ -59,25 +100,43 @@ public class TypeRecipe implements Parcelable {
         this.genreOfRecip = genreOfRecip;
     }
 
-    @Override
-    @NonNull
-    public String toString() {
-        return "TypeRecipe{" +
-                "nameOfRecipe='" + nameOfRecipe + '\'' +
-                ", numberOfRecipe=" + numberOfRecipe +
-                ", genreOfRecip='" + genreOfRecip + '\'' +
-                '}';
+    public String getDiet() {
+        return diet;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setDiet(String diet) {
+        this.diet = diet;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(nameOfRecipe);
-        dest.writeInt(numberOfRecipe);
-        dest.writeString(genreOfRecip);
+    public String getIntolerancesPayload() {
+        return intolerancesPayload;
+    }
+
+    public void setIntolerancesPayload(String intolerancesPayload) {
+        this.intolerancesPayload = intolerancesPayload;
+    }
+
+    public String getIngredientsExcludePayload() {
+        return ingredientsExcludePayload;
+    }
+
+    public void setIngredientsExcludePayload(String ingredientsExcludePayload) {
+        this.ingredientsExcludePayload = ingredientsExcludePayload;
+    }
+
+    public boolean isLimitLicense() {
+        return limitLicense;
+    }
+
+    public void setLimitLicense(boolean limitLicense) {
+        this.limitLicense = limitLicense;
+    }
+
+    public boolean isIncludeInstructions() {
+        return includeInstructions;
+    }
+
+    public void setIncludeInstructions(boolean includeInstructions) {
+        this.includeInstructions = includeInstructions;
     }
 }

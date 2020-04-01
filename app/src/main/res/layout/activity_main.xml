@@ -4,73 +4,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:isScrollContainer="true"
     tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/namepage"
-        android:layout_width="wrap_content"
-        android:layout_height="57dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <AutoCompleteTextView
         android:id="@+id/nameRecipe"
-        android:layout_width="222dp"
+        android:layout_width="0dp"
         android:layout_height="44dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/search_input_hint"
         android:imeOptions="actionDone"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.724"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/namepage" />
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/genre"
-        android:layout_width="234dp"
+        android:layout_width="0dp"
         android:layout_height="21dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginStart="8dp"
         android:entries="@array/cuisine_list"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/recipeStyleTextView"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
         app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toEndOf="@+id/recipeStyleTextView"
-        app:layout_constraintTop_toBottomOf="@+id/nameRecipe" />
+        app:layout_constraintTop_toTopOf="@+id/recipeStyleTextView" />
+
+    <TextView
+        android:id="@+id/textDiet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/search_diet"
+        app:layout_constraintStart_toStartOf="@+id/numberOfResultsTextView"
+        app:layout_constraintTop_toBottomOf="@+id/numberOfResultsTextView" />
 
     <TextView
         android:id="@+id/recipeStyleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="16dp"
         android:text="@string/recipeStyle"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@+id/nameRecipe" />
 
     <SeekBar
         android:id="@+id/numberRecipe"
-        android:layout_width="180dp"
+        android:layout_width="0dp"
         android:layout_height="21dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.335"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/numberOfResultsTextView"
+        app:layout_constraintEnd_toStartOf="@+id/valueOfSeekBar"
         app:layout_constraintStart_toEndOf="@+id/numberOfResultsTextView"
-        app:layout_constraintTop_toBottomOf="@+id/genre" />
+        app:layout_constraintTop_toTopOf="@+id/numberOfResultsTextView" />
 
     <TextView
         android:id="@+id/numberOfResultsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:text="@string/numberOfResultsText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipeStyleTextView" />
@@ -79,24 +77,105 @@
         android:id="@+id/seearchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/searchButton"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberRecipe"
-        app:layout_constraintVertical_bias="0.43" />
+        app:layout_constraintTop_toBottomOf="@+id/switchInstructionsRequired" />
 
     <TextView
         android:id="@+id/valueOfSeekBar"
         android:layout_width="57dp"
         android:layout_height="22dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="48dp"
         android:text="@string/valueOfseekBar"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/numberRecipe"
-        app:layout_constraintTop_toBottomOf="@+id/genre" />
+        app:layout_constraintBottom_toBottomOf="@+id/numberRecipe"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintTop_toTopOf="@+id/numberRecipe" />
+
+    <Spinner
+        android:id="@+id/spinnerDiet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:entries="@array/diet_list"
+        app:layout_constraintBottom_toBottomOf="@+id/textDiet"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toEndOf="@+id/textDiet"
+        app:layout_constraintTop_toTopOf="@+id/textDiet" />
+
+
+    <Switch
+        android:id="@+id/switchLimitLicense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/limit_license"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/chipsExcludeIngredients" />
+
+    <Switch
+        android:id="@+id/switchInstructionsRequired"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/instructions_required"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toEndOf="@+id/switchLimitLicense"
+        app:layout_constraintTop_toTopOf="@+id/switchLimitLicense" />
+
+    <com.tylersuehr.chips.ChipsInputLayout
+        android:id="@+id/chipsIntelorances"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/intolerances"
+        android:textAlignment="viewStart"
+        android:textColor="#212121"
+        android:textColorHint="#757575"
+        app:allowCustomChips="false"
+        app:chip_showDetails="false"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@+id/textDiet"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDiet"
+        app:maxRows="2" />
+
+    <com.tylersuehr.chips.ChipsInputLayout
+        android:id="@+id/chipsExcludeIngredients"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:clipToPadding="false"
+        android:hint="@string/exclude_ingredients"
+        android:textAlignment="viewStart"
+        android:textColor="#212121"
+        android:textColorHint="#757575"
+        app:allowCustomChips="false"
+        app:chip_showDetails="false"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toStartOf="@+id/textDiet"
+        app:layout_constraintTop_toBottomOf="@+id/chipsIntelorances"
+        app:maxRows="2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/hideGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="valueOfSeekBar,genre,numberRecipe,numberOfResultsTextView,recipeStyleTextView,switchInstructionsRequired,switchLimitLicense,spinnerDiet,textDiet" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

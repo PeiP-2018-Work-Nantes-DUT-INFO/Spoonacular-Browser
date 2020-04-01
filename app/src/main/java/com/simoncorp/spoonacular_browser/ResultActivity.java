@@ -112,7 +112,13 @@ public class ResultActivity extends AppCompatActivity {
         service.searchRecipes(query.getNameOfRecipe(),
                 query.getGenreOfRecip(),
                 offset,
-                query.getNumberOfRecipe())
+                query.getNumberOfRecipe(),
+                query.getDiet(),
+                query.getIngredientsExcludePayload(),
+                query.getIntolerancesPayload(),
+                query.isLimitLicense(),
+                query.isIncludeInstructions()
+                )
                 .enqueue(new Callback<SearchResults>() {
                     @Override
                     @EverythingIsNonNull
@@ -121,9 +127,6 @@ public class ResultActivity extends AppCompatActivity {
                         progress.setVisibility(View.INVISIBLE);
                         if (response.body() != null) {
                             resultAdapter.addAll(response.body().getResults());
-                            Toast.makeText(ResultActivity.this,
-                                    "Items: " + String.valueOf(resultAdapter.getCount()),
-                                    Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ResultActivity.this, response.raw().toString(),
                                     Toast.LENGTH_LONG).show();

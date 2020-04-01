@@ -29,4 +29,9 @@
     <string name="tab_title_ingredients">Ingredients</string>
     <string name="tab_title_steps">Steps</string>
     <string name="info_no_instructions">No instructions available</string>
+    <string name="limit_license">Limit license</string>
+    <string name="instructions_required">Instructions required</string>
+    <string name="search_diet">Diet</string>
+    <string name="exclude_ingredients">Type here ingredients to exclude</string>
+    <string name="intolerances">Type here your intolerances</string>
 </resources>

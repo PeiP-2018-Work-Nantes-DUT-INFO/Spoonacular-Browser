@@ -11,12 +11,20 @@ import retrofit2.http.Query;
 
 public interface SpoonacularService {
     @GET("/recipes/search")
-    Call<SearchResults> searchRecipes(@Query("query") String query, @Query("cuisine") String cuisine,
-                           @Nullable @Query("offset") Integer offset,
-                           @Nullable @Query("number") Integer limit);
+    Call<SearchResults> searchRecipes(@Query("query") String query,
+                                      @Nullable @Query("cuisine") String cuisine,
+                                      @Nullable @Query("offset") Integer offset,
+                                      @Nullable @Query("number") Integer limit,
+                                      @Nullable @Query("diet") String diet,
+                                      @Nullable @Query("excludeIngredients") String excludeIngredients,
+                                      @Nullable @Query("intolerances") String intolerance,
+                                      @Nullable @Query("limitLicense") Boolean limitLicense,
+                                      @Nullable @Query("instructionsRequired") Boolean instructionsRequired);
+
     @GET("/recipes/autocomplete")
     Call<List<AutocompleteResult>> searchRecipesAutocomplete(@Query("query") String query,
                                                              @Nullable @Query("limit") Integer limit);
+
     @GET("/recipes/{id}/information")
     Call<RecipeInformation> getRecipeInformation(@Path("id") Integer recipeId);
 
