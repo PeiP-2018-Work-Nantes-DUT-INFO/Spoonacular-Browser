@@ -1,11 +1,14 @@
 
 package com.simoncorp.spoonacular_browser.api;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Step {
+public class Step implements Parcelable {
 
     @SerializedName("number")
     @Expose
@@ -22,6 +25,27 @@ public class Step {
     @SerializedName("length")
     @Expose
     private Length length;
+
+    protected Step(Parcel in) {
+        if (in.readByte() == 0) {
+            number = null;
+        } else {
+            number = in.readInt();
+        }
+        step = in.readString();
+    }
+
+    public static final Creator<Step> CREATOR = new Creator<Step>() {
+        @Override
+        public Step createFromParcel(Parcel in) {
+            return new Step(in);
+        }
+
+        @Override
+        public Step[] newArray(int size) {
+            return new Step[size];
+        }
+    };
 
     public Integer getNumber() {
         return number;
@@ -63,4 +87,19 @@ public class Step {
         this.length = length;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        if (number == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(number);
+        }
+        parcel.writeString(step);
+    }
 }

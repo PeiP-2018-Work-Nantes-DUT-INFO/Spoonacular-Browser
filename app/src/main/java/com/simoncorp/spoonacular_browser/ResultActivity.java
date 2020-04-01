@@ -2,15 +2,16 @@ package com.simoncorp.spoonacular_browser;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.simoncorp.spoonacular_browser.api.RecipeInformation;
 import com.simoncorp.spoonacular_browser.api.Result;
 import com.simoncorp.spoonacular_browser.api.RetrofitClientInstance;
 import com.simoncorp.spoonacular_browser.api.SearchResults;
@@ -24,10 +25,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.internal.EverythingIsNonNull;
 
-public class ResultActvity extends AppCompatActivity {
+public class ResultActivity extends AppCompatActivity {
+
     private ResultAdapter resultAdapter;
     private SpoonacularService service;
     private TypeRecipe query;
+    private ProgressBar progress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +42,13 @@ public class ResultActvity extends AppCompatActivity {
         ArrayList<Result> myArrayList = new ArrayList<>();
         this.resultAdapter = new ResultAdapter(this, myArrayList);
         final ListView listView = findViewById(R.id.resultListView);
+        this.progress = findViewById(R.id.progressBar);
+
         listView.setAdapter(resultAdapter);
         listView.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
-                if(totalItemsCount < 900) {
+                if (totalItemsCount < 900) {
                     loadNextDataFromApi(totalItemsCount);
                     return true;
                 } else {
@@ -50,24 +56,50 @@ public class ResultActvity extends AppCompatActivity {
                 }
             }
         });
-        if (query != null) {
-            loadNextDataFromApi(0);
-        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Result recipe = resultAdapter.getItem(position);
+                progress.setVisibility(View.VISIBLE);
 
-                Intent goToDisplayRecipe = new Intent(ResultActvity.this, DisplayRecipeActivity.class);
-                goToDisplayRecipe.putExtra("result", recipe);
-                startActivity(goToDisplayRecipe);
+                service.getRecipeInformation(recipe.getId())
+                        .enqueue(new Callback<RecipeInformation>() {
+                            @SuppressLint("DefaultLocale")
+                            @Override
+                            public void onResponse(Call<RecipeInformation> call,
+                                                   Response<RecipeInformation> response) {
+                                progress.setVisibility(View.INVISIBLE);
+                                RecipeInformation recipe = response.body();
+                                if (recipe == null) {
+                                    Toast.makeText(ResultActivity.this,
+                                            response.raw().toString(), Toast.LENGTH_LONG).show();
+                                    finish();
+                                }
+                                Intent goToDisplayRecipe = new Intent(ResultActivity.this,
+                                        DisplayRecipeActivity.class);
+                                goToDisplayRecipe.putExtra("recipe", recipe);
+                                startActivity(goToDisplayRecipe);
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<RecipeInformation> call, Throwable t) {
+                                Toast.makeText(ResultActivity.this,
+                                        "Something bad happened", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
+
+        if (query != null) {
+            loadNextDataFromApi(0);
+        } else {
+            finish();
+        }
 
     }
 
     private void loadNextDataFromApi(final int offset) {
-        final ProgressBar progress = findViewById(R.id.progressBar);
         progress.setVisibility(View.VISIBLE);
         service.searchRecipes(query.getNameOfRecipe(),
                 query.getGenreOfRecip(),
@@ -76,24 +108,26 @@ public class ResultActvity extends AppCompatActivity {
                 .enqueue(new Callback<SearchResults>() {
                     @Override
                     @EverythingIsNonNull
-                    public void onResponse(Call<SearchResults> call, Response<SearchResults> response) {
+                    public void onResponse(Call<SearchResults> call,
+                                           Response<SearchResults> response) {
                         progress.setVisibility(View.INVISIBLE);
-                        if(response.body() != null) {
+                        if (response.body() != null) {
                             resultAdapter.addAll(response.body().getResults());
-                            Toast.makeText(ResultActvity.this,
+                            Toast.makeText(ResultActivity.this,
                                     String.valueOf(resultAdapter.getCount()),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(ResultActvity.this, response.raw().toString(),
+                            Toast.makeText(ResultActivity.this, response.raw().toString(),
                                     Toast.LENGTH_LONG).show();
+                            finish();
                         }
                     }
 
                     @Override
                     @EverythingIsNonNull
                     public void onFailure(Call<SearchResults> call, Throwable t) {
-                        Toast.makeText(ResultActvity.this,
-                                "Something bad happenned", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ResultActivity.this,
+                                "Something bad happened", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

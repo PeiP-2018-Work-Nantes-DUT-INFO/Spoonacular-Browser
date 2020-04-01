@@ -11,4 +11,21 @@
     <string name="description">Recipe Description</string>
     <string name="searchButton">Search</string>
     <string name="valueOfseekBar">10</string>
+    <string name="info_no_ingredients">No ingredients</string>
+    <string name="info_source_url">Source url: %s</string>
+    <string name="info_img_url">IMG url: %s</string>
+    <string name="info_id">Id: %d</string>
+    <string name="info_ready_minutes">Ready in minutes: %d</string>
+    <string name="info_credits">Credits: %s</string>
+    <string name="info_score">Spoonacular Score: %f</string>
+    <string name="info_gluten_free">Is gluten free: %b</string>
+    <string name="info_vegan">Is vegan: %b</string>
+    <string name="info_vegetarian">Is vegetarian: %b</string>
+    <string name="info_cheap">Is cheap: %b</string>
+    <string name="info_aggr_likes">Aggregate likes: %d</string>
+    <string name="info_price_serving">Price per serving: %f</string>
+    <string name="info_dish_type">Dish types: %s</string>
+    <string name="tab_title_info">Information</string>
+    <string name="tab_title_ingredients">Ingredients</string>
+    <string name="tab_title_steps">Steps</string>
 </resources>

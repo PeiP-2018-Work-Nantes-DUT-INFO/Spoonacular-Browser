@@ -27,6 +27,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/search_input_hint"
+        android:imeOptions="actionDone"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.724"

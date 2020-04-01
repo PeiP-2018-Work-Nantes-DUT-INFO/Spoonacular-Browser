@@ -1,11 +1,14 @@
 
 package com.simoncorp.spoonacular_browser.api;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RecipeInformation {
+public class RecipeInformation implements Parcelable {
 
     @SerializedName("vegetarian")
     @Expose
@@ -118,6 +121,195 @@ public class RecipeInformation {
     @SerializedName("originalId")
     @Expose
     private Object originalId;
+
+    protected RecipeInformation(Parcel in) {
+        byte tmpVegetarian = in.readByte();
+        vegetarian = tmpVegetarian == 0 ? null : tmpVegetarian == 1;
+        byte tmpVegan = in.readByte();
+        vegan = tmpVegan == 0 ? null : tmpVegan == 1;
+        byte tmpGlutenFree = in.readByte();
+        glutenFree = tmpGlutenFree == 0 ? null : tmpGlutenFree == 1;
+        byte tmpDairyFree = in.readByte();
+        dairyFree = tmpDairyFree == 0 ? null : tmpDairyFree == 1;
+        byte tmpVeryHealthy = in.readByte();
+        veryHealthy = tmpVeryHealthy == 0 ? null : tmpVeryHealthy == 1;
+        byte tmpCheap = in.readByte();
+        cheap = tmpCheap == 0 ? null : tmpCheap == 1;
+        byte tmpVeryPopular = in.readByte();
+        veryPopular = tmpVeryPopular == 0 ? null : tmpVeryPopular == 1;
+        byte tmpSustainable = in.readByte();
+        sustainable = tmpSustainable == 0 ? null : tmpSustainable == 1;
+        if (in.readByte() == 0) {
+            weightWatcherSmartPoints = null;
+        } else {
+            weightWatcherSmartPoints = in.readInt();
+        }
+        gaps = in.readString();
+        byte tmpLowFodmap = in.readByte();
+        lowFodmap = tmpLowFodmap == 0 ? null : tmpLowFodmap == 1;
+        if (in.readByte() == 0) {
+            preparationMinutes = null;
+        } else {
+            preparationMinutes = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            cookingMinutes = null;
+        } else {
+            cookingMinutes = in.readInt();
+        }
+        sourceUrl = in.readString();
+        spoonacularSourceUrl = in.readString();
+        if (in.readByte() == 0) {
+            aggregateLikes = null;
+        } else {
+            aggregateLikes = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            spoonacularScore = null;
+        } else {
+            spoonacularScore = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            healthScore = null;
+        } else {
+            healthScore = in.readDouble();
+        }
+        creditsText = in.readString();
+        sourceName = in.readString();
+        if (in.readByte() == 0) {
+            pricePerServing = null;
+        } else {
+            pricePerServing = in.readDouble();
+        }
+        extendedIngredients = in.createTypedArrayList(ExtendedIngredient.CREATOR);
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        title = in.readString();
+        if (in.readByte() == 0) {
+            readyInMinutes = null;
+        } else {
+            readyInMinutes = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            servings = null;
+        } else {
+            servings = in.readInt();
+        }
+        image = in.readString();
+        imageType = in.readString();
+        summary = in.readString();
+        dishTypes = in.createStringArrayList();
+        diets = in.createStringArrayList();
+        instructions = in.readString();
+        analyzedInstructions = in.createTypedArrayList(AnalyzedInstruction.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte((byte) (vegetarian == null ? 0 : vegetarian ? 1 : 2));
+        dest.writeByte((byte) (vegan == null ? 0 : vegan ? 1 : 2));
+        dest.writeByte((byte) (glutenFree == null ? 0 : glutenFree ? 1 : 2));
+        dest.writeByte((byte) (dairyFree == null ? 0 : dairyFree ? 1 : 2));
+        dest.writeByte((byte) (veryHealthy == null ? 0 : veryHealthy ? 1 : 2));
+        dest.writeByte((byte) (cheap == null ? 0 : cheap ? 1 : 2));
+        dest.writeByte((byte) (veryPopular == null ? 0 : veryPopular ? 1 : 2));
+        dest.writeByte((byte) (sustainable == null ? 0 : sustainable ? 1 : 2));
+        if (weightWatcherSmartPoints == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(weightWatcherSmartPoints);
+        }
+        dest.writeString(gaps);
+        dest.writeByte((byte) (lowFodmap == null ? 0 : lowFodmap ? 1 : 2));
+        if (preparationMinutes == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(preparationMinutes);
+        }
+        if (cookingMinutes == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(cookingMinutes);
+        }
+        dest.writeString(sourceUrl);
+        dest.writeString(spoonacularSourceUrl);
+        if (aggregateLikes == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(aggregateLikes);
+        }
+        if (spoonacularScore == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(spoonacularScore);
+        }
+        if (healthScore == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(healthScore);
+        }
+        dest.writeString(creditsText);
+        dest.writeString(sourceName);
+        if (pricePerServing == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(pricePerServing);
+        }
+        dest.writeTypedList(extendedIngredients);
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeString(title);
+        if (readyInMinutes == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(readyInMinutes);
+        }
+        if (servings == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(servings);
+        }
+        dest.writeString(image);
+        dest.writeString(imageType);
+        dest.writeString(summary);
+        dest.writeStringList(dishTypes);
+        dest.writeStringList(diets);
+        dest.writeString(instructions);
+        dest.writeTypedList(analyzedInstructions);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<RecipeInformation> CREATOR = new Creator<RecipeInformation>() {
+        @Override
+        public RecipeInformation createFromParcel(Parcel in) {
+            return new RecipeInformation(in);
+        }
+
+        @Override
+        public RecipeInformation[] newArray(int size) {
+            return new RecipeInformation[size];
+        }
+    };
 
     public Boolean getVegetarian() {
         return vegetarian;

@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.simoncorp.spoonacular_browser.DisplayRecipeActivity" />
-        <activity android:name="com.simoncorp.spoonacular_browser.ResultActvity" />
+        <activity android:name="com.simoncorp.spoonacular_browser.ResultActivity" />
         <activity android:name="com.simoncorp.spoonacular_browser.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

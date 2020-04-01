@@ -6,26 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.simoncorp.spoonacular_browser.api.AutocompleteResult;
 import com.simoncorp.spoonacular_browser.api.RetrofitClientInstance;
-import com.simoncorp.spoonacular_browser.api.SearchResults;
 import com.simoncorp.spoonacular_browser.api.SpoonacularService;
 import com.simoncorp.spoonacular_browser.model.TypeRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -111,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
                 TypeRecipe typeRecipe = new TypeRecipe(nameOfRecipe, numberOfRecipe, genreOfRecipe);
 
-                Intent goToResult = new Intent(MainActivity.this, ResultActvity.class);
+                Intent goToResult = new Intent(MainActivity.this, ResultActivity.class);
                 goToResult.putExtra("query", typeRecipe);
                 startActivity(goToResult);
 
