@@ -1,10 +1,13 @@
 
 package com.simoncorp.spoonacular_browser.api;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Equipment {
+public class Equipment implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -15,6 +18,28 @@ public class Equipment {
     @SerializedName("image")
     @Expose
     private String image;
+
+    protected Equipment(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        name = in.readString();
+        image = in.readString();
+    }
+
+    public static final Creator<Equipment> CREATOR = new Creator<Equipment>() {
+        @Override
+        public Equipment createFromParcel(Parcel in) {
+            return new Equipment(in);
+        }
+
+        @Override
+        public Equipment[] newArray(int size) {
+            return new Equipment[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -40,4 +65,20 @@ public class Equipment {
         this.image = image;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        if (id == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(id);
+        }
+        parcel.writeString(name);
+        parcel.writeString(image);
+    }
 }
