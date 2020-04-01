@@ -5,7 +5,7 @@
     <string name="recipeStyle">Recipe Type</string>
     <string name="recipeImageContentDescription">This is the default recipe image. Miam, that\'s looking good !</string>
     <string name="recipeTextSimple">This is a simple recipe !</string>
-    <string name="numberOfResultsText">Number</string>
+    <string name="numberOfResultsText">Number of results</string>
     <string name="search_input_hint" >Search</string>
     <string name="Time">25</string>
     <string name="description">Recipe Description</string>
@@ -28,4 +28,5 @@
     <string name="tab_title_info">Information</string>
     <string name="tab_title_ingredients">Ingredients</string>
     <string name="tab_title_steps">Steps</string>
+    <string name="info_no_instructions">No instructions available</string>
 </resources>

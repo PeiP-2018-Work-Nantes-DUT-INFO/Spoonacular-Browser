@@ -3,11 +3,11 @@
     <string name="app_name">Spoonacular-Browser</string>
     <string name="result_activity_title">Résultats</string>
     <string name="recipe_title">Oeux fris</string>
-    <string name="recipeStyle">Genre</string>
+    <string name="recipeStyle">Type de cuisine</string>
     <string name="search_input_hint">Recherche</string>
     <string name="recipeImageContentDescription">Ceci est un exemple d\'image</string>
     <string name="recipeTextSimple">Ceci est une simple recette !</string>
-    <string name="numberOfResultsText">Nombre</string>
+    <string name="numberOfResultsText">Nombre de résultats</string>
     <string name="description">Description</string>
     <string name="Time">25</string>
     <string name="searchButton">Rechercher</string>
@@ -23,10 +23,11 @@
     <string name="info_vegan">Est pour les vegans : %b</string>
     <string name="info_vegetarian">Est pour les végétariens : %b</string>
     <string name="info_cheap">Est pas chère : %b</string>
-    <string name="info_aggr_likes">Nombre de mentions j\'aimes aggrégé : %d</string>
+    <string name="info_aggr_likes">Nombre de mentions j\'aime aggrégé : %d</string>
     <string name="info_price_serving">Prix par service : %f</string>
     <string name="info_dish_type">Type de repas : %s</string>
     <string name="tab_title_info">Informations</string>
     <string name="tab_title_ingredients">Ingrédients</string>
     <string name="tab_title_steps">Instructions</string>
+    <string name="info_no_instructions">Pas d\'instructions, malheureusement ...</string>
 </resources>
