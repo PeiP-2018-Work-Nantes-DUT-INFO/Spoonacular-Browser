@@ -50,17 +50,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <ScrollView
-            android:id="@+id/scrollView2"
-            android:layout_width="333dp"
-            android:layout_height="116dp">
-
-            <TextView
-                android:id="@+id/stepsTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/recipeTextSimple" />
-        </ScrollView>
     </androidx.viewpager.widget.ViewPager>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
