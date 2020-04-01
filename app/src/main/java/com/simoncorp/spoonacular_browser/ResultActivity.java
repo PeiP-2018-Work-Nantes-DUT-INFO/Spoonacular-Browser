@@ -122,7 +122,7 @@ public class ResultActivity extends AppCompatActivity {
                         if (response.body() != null) {
                             resultAdapter.addAll(response.body().getResults());
                             Toast.makeText(ResultActivity.this,
-                                    String.valueOf(resultAdapter.getCount()),
+                                    "Items: " + String.valueOf(resultAdapter.getCount()),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(ResultActivity.this, response.raw().toString(),
