@@ -34,4 +34,5 @@
     <string name="search_diet">Diet</string>
     <string name="exclude_ingredients">Type here ingredients to exclude</string>
     <string name="intolerances">Type here your intolerances</string>
+    <string name="clipboard">Copied to clip board</string>
 </resources>

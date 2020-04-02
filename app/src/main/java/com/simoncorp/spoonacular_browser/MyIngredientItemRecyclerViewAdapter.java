@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.simoncorp.spoonacular_browser.IngredientItemFragment.OnListFragmentInteractionListener;
-import com.simoncorp.spoonacular_browser.StringItemList.StringItem;
+import com.simoncorp.spoonacular_browser.viewmodel.StringItem;
 
 import java.util.List;
 

@@ -1,5 +1,5 @@
 
-package com.simoncorp.spoonacular_browser.api;
+package com.simoncorp.spoonacular_browser.repositories.model.recipe;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,7 +7,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Metric implements Parcelable {
+public class Us implements Parcelable {
 
     @SerializedName("amount")
     @Expose
@@ -19,7 +19,7 @@ public class Metric implements Parcelable {
     @Expose
     private String unitLong;
 
-    protected Metric(Parcel in) {
+    protected Us(Parcel in) {
         if (in.readByte() == 0) {
             amount = null;
         } else {
@@ -29,15 +29,15 @@ public class Metric implements Parcelable {
         unitLong = in.readString();
     }
 
-    public static final Creator<Metric> CREATOR = new Creator<Metric>() {
+    public static final Creator<Us> CREATOR = new Creator<Us>() {
         @Override
-        public Metric createFromParcel(Parcel in) {
-            return new Metric(in);
+        public Us createFromParcel(Parcel in) {
+            return new Us(in);
         }
 
         @Override
-        public Metric[] newArray(int size) {
-            return new Metric[size];
+        public Us[] newArray(int size) {
+            return new Us[size];
         }
     };
 

@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.simoncorp.spoonacular_browser.StringItemList.StringItem;
+import com.simoncorp.spoonacular_browser.viewmodel.StringItem;
 
 import java.util.ArrayList;
 

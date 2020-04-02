@@ -35,4 +35,5 @@
     <string name="intolerances">Entrez ici vos intolérances</string>
     <string name="search_diet">Régime de diet</string>
     <string name="instructions_required">Contient instructions</string>
+    <string name="clipboard">Copié dans le presse papier !</string>
 </resources>
