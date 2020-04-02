@@ -26,6 +26,7 @@ public class Step implements Parcelable {
     @Expose
     private Length length;
 
+
     protected Step(Parcel in) {
         if (in.readByte() == 0) {
             number = null;
@@ -33,6 +34,28 @@ public class Step implements Parcelable {
             number = in.readInt();
         }
         step = in.readString();
+        ingredients = in.createTypedArrayList(Ingredient.CREATOR);
+        equipment = in.createTypedArrayList(Equipment.CREATOR);
+        length = in.readParcelable(Length.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (number == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(number);
+        }
+        dest.writeString(step);
+        dest.writeTypedList(ingredients);
+        dest.writeTypedList(equipment);
+        dest.writeParcelable(length, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Step> CREATOR = new Creator<Step>() {
@@ -87,19 +110,4 @@ public class Step implements Parcelable {
         this.length = length;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        if (number == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(number);
-        }
-        parcel.writeString(step);
-    }
 }
