@@ -81,4 +81,9 @@ public class Ingredient implements Parcelable {
         parcel.writeString(name);
         parcel.writeString(image);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

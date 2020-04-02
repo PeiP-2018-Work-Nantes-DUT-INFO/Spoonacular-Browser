@@ -34,7 +34,7 @@ import retrofit2.Response;
 import retrofit2.internal.EverythingIsNonNull;
 
 /**
- * Activité qui sert afficher et a géré la liste des recettes
+ * Activité qui sert afficher et à gérer la liste des recettes
  */
 public class ResultActivity extends AppCompatActivity {
 
@@ -188,8 +188,8 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     /**
-     *
      * Fonction qui ferme l'activité courante si le boutton home est sélectionné
+     *
      * @param item button se trouvant dans la bar de status
      */
     @Override

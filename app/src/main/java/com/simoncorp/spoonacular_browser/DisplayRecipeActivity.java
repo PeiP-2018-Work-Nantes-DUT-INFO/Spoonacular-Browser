@@ -96,6 +96,7 @@ public class DisplayRecipeActivity extends AppCompatActivity implements Ingredie
 
     /**
      * Créé le contenu du fragment d'information à partir d'une recette donnée
+     *
      * @param recipe La recette
      * @return Liste contenant à chaque entrée une information sur la recette
      */
@@ -144,8 +145,9 @@ public class DisplayRecipeActivity extends AppCompatActivity implements Ingredie
 
     /**
      * Créé le contenu du fragment d'ingredients à partir de la recette
+     *
      * @param recipe La recette
-     * @return  Liste contenant à chaque entrée un ingrédient nécessaire à la recette.
+     * @return Liste contenant à chaque entrée un ingrédient nécessaire à la recette.
      * Cette liste aura qu'un seul élément indiquant qu'il n'y a pas d'ingrédients si n'a aucun ingrédients.
      */
     private ArrayList<StringItem> getIngredientItems(RecipeInformation recipe) {
@@ -154,8 +156,10 @@ public class DisplayRecipeActivity extends AppCompatActivity implements Ingredie
         if (ingredients != null) {
             for (int i = 0; i < ingredients.size(); i++) {
                 ExtendedIngredient ingredient = ingredients.get(i);
+                String subtitle = String.format("%.2f %s - %s",
+                        ingredient.getAmount(), ingredient.getUnit(), ingredient.getAisle());
                 ingredientItems.add(new StringItem(String.valueOf(i + 1),
-                        ingredient.getName(), ingredient.getAisle()));
+                        ingredient.getName(), subtitle));
             }
         } else {
             ingredientItems.add(new StringItem("", getString(R.string.info_no_ingredients), ""));
@@ -165,6 +169,7 @@ public class DisplayRecipeActivity extends AppCompatActivity implements Ingredie
 
     /**
      * Créé le contenu du fragment d'instructions à partir de la recette
+     *
      * @param recipe La recette
      * @return Liste contenant à chaque entrée une instruction.
      * Cette liste aura qu'un seul élément indiquant qu'il n'y a pas d'instructions si la recette n'en a pas.
@@ -178,12 +183,11 @@ public class DisplayRecipeActivity extends AppCompatActivity implements Ingredie
             for (int i = 0; i < steps.size(); i++) {
                 Step step = steps.get(i);
                 stepsItems.add(new StringItem(String.valueOf(i + 1),
-                        step.getStep(), ""));
+                        step.getStep(), TextUtils.join(", ", step.getIngredients())));
             }
         } else {
-            if(recipe.getInstructions() != null) {
-                stepsItems.add(new StringItem("1", recipe.getInstructions(),
-                        ""));
+            if (recipe.getInstructions() != null) {
+                stepsItems.add(new StringItem("1", recipe.getInstructions(), ""));
             } else {
                 stepsItems.add(new StringItem("", getString(R.string.info_no_instructions),
                         ""));
@@ -191,8 +195,10 @@ public class DisplayRecipeActivity extends AppCompatActivity implements Ingredie
         }
         return stepsItems;
     }
+
     /**
      * Fonction qui ferme l'activité courante si le boutton home est appuié
+     *
      * @param item button se trouvant dans la bar de status
      */
     @Override

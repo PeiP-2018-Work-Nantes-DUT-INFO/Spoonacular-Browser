@@ -18,13 +18,13 @@
     <string name="info_id">ID : %d</string>
     <string name="info_ready_minutes">Est prêt en (min) : %d</string>
     <string name="info_credits">Crédits : %s</string>
-    <string name="info_score">Score spoonacular : %f</string>
+    <string name="info_score">Score spoonacular : %.2f</string>
     <string name="info_gluten_free">Contient pas de gluten : %b</string>
     <string name="info_vegan">Est pour les vegans : %b</string>
     <string name="info_vegetarian">Est pour les végétariens : %b</string>
     <string name="info_cheap">Est pas chère : %b</string>
     <string name="info_aggr_likes">Nombre de mentions j\'aime aggrégé : %d</string>
-    <string name="info_price_serving">Prix par service : %f</string>
+    <string name="info_price_serving">Prix par service : %.2f</string>
     <string name="info_dish_type">Type de repas : %s</string>
     <string name="tab_title_info">Informations</string>
     <string name="tab_title_ingredients">Ingrédients</string>

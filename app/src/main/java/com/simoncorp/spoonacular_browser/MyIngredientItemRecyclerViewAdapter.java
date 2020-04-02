@@ -39,7 +39,12 @@ public class MyIngredientItemRecyclerViewAdapter extends RecyclerView.Adapter<My
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).id);
         holder.mContentView.setText(mValues.get(position).content);
-
+        String details = mValues.get(position).details;
+        if(details == null || details.isEmpty()) {
+            holder.mDetailsView.setVisibility(View.GONE);
+        } else {
+            holder.mDetailsView.setText(mValues.get(position).details);
+        }
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +66,7 @@ public class MyIngredientItemRecyclerViewAdapter extends RecyclerView.Adapter<My
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
+        public final TextView mDetailsView;
         public StringItem mItem;
 
         public ViewHolder(View view) {
@@ -68,6 +74,7 @@ public class MyIngredientItemRecyclerViewAdapter extends RecyclerView.Adapter<My
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.item_number);
             mContentView = (TextView) view.findViewById(R.id.content);
+            mDetailsView = (TextView) view.findViewById(R.id.details);
         }
 
         @Override
