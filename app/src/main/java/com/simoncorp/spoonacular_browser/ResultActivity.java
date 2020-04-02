@@ -1,3 +1,9 @@
+/*
+ * @author Simon Sassi, Baptiste Batard
+ * @version 1.0
+ * @date 02/04/2020
+ */
+
 package com.simoncorp.spoonacular_browser;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +19,12 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.simoncorp.spoonacular_browser.api.RecipeInformation;
-import com.simoncorp.spoonacular_browser.api.Result;
-import com.simoncorp.spoonacular_browser.api.RetrofitClientInstance;
-import com.simoncorp.spoonacular_browser.api.SearchResults;
-import com.simoncorp.spoonacular_browser.api.SpoonacularService;
-import com.simoncorp.spoonacular_browser.model.TypeRecipe;
+import com.simoncorp.spoonacular_browser.repositories.model.recipe.RecipeInformation;
+import com.simoncorp.spoonacular_browser.repositories.model.search.Result;
+import com.simoncorp.spoonacular_browser.repositories.remotedatasource.RetrofitClientInstance;
+import com.simoncorp.spoonacular_browser.repositories.model.search.SearchResults;
+import com.simoncorp.spoonacular_browser.repositories.remotedatasource.SpoonacularService;
+import com.simoncorp.spoonacular_browser.viewmodel.TypeRecipe;
 
 import java.util.ArrayList;
 
@@ -27,6 +33,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.internal.EverythingIsNonNull;
 
+/**
+ * Activité qui sert afficher et a géré la liste des recettes
+ */
 public class ResultActivity extends AppCompatActivity {
 
     private ResultAdapter resultAdapter;
@@ -37,11 +46,18 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         setContentView(R.layout.activity_result_activity);
+
+        /*
+         * Permet d'ajouter un boutton de retour dans la bar de status
+         */
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+
+        //Création d'une instance de rétrofit
         service = RetrofitClientInstance.getRetrofitInstance()
                 .create(SpoonacularService.class);
         query = getIntent().getParcelableExtra("query");
@@ -51,6 +67,9 @@ public class ResultActivity extends AppCompatActivity {
         this.progress = findViewById(R.id.progressBar);
 
         listView.setAdapter(resultAdapter);
+        /*
+         * peremet de rechercher dans l'api pour effectuer un scroll infinie
+         */
         listView.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public boolean onLoadMore(int page, int totalItemsCount) {
@@ -62,15 +81,24 @@ public class ResultActivity extends AppCompatActivity {
                 }
             }
         });
+        /*
+         * Gestion d'un click sur un item de la list
+         */
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Result recipe = resultAdapter.getItem(position);
                 progress.setVisibility(View.VISIBLE);
+                // Empèche l'utilisateur de clicker a nouveau tant que la page n'est pas charger
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 service.getRecipeInformation(recipe.getId())
                         .enqueue(new Callback<RecipeInformation>() {
+                            /**
+                             * En cas de succès de la requette on instancie une variable de la
+                             * classe RecipeInformation dans laquelle on les informations récupérer
+                             * pour les transmettre au l'activité suivante.
+                             */
                             @SuppressLint("DefaultLocale")
                             @Override
                             public void onResponse(Call<RecipeInformation> call,
@@ -78,6 +106,7 @@ public class ResultActivity extends AppCompatActivity {
                                 progress.setVisibility(View.INVISIBLE);
                                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                                 RecipeInformation recipe = response.body();
+                                //Si le resultat est null on termine l'activité avec un message d'erreur
                                 if (recipe == null) {
                                     Toast.makeText(ResultActivity.this,
                                             response.raw().toString(), Toast.LENGTH_LONG).show();
@@ -90,6 +119,9 @@ public class ResultActivity extends AppCompatActivity {
 
                             }
 
+                            /**
+                             * Affiche un toast en cas d'erreur lors de la recherche de recettes
+                             */
                             @Override
                             public void onFailure(Call<RecipeInformation> call, Throwable t) {
                                 Toast.makeText(ResultActivity.this,
@@ -107,6 +139,13 @@ public class ResultActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Effectue une requète sur l'apiour obtenir le nombre de recettes corespondant au spécification
+     * demander par l'utilisateur sur la page précédente
+     *
+     * @param offset nombre de recettes que l'on ne vas pas recherhcher, utiliser surtout pour le
+     *               scroll inifnie
+     */
     private void loadNextDataFromApi(final int offset) {
         progress.setVisibility(View.VISIBLE);
         service.searchRecipes(query.getNameOfRecipe(),
@@ -118,8 +157,11 @@ public class ResultActivity extends AppCompatActivity {
                 query.getIntolerancesPayload(),
                 query.isLimitLicense(),
                 query.isIncludeInstructions()
-                )
+        )
                 .enqueue(new Callback<SearchResults>() {
+                    /**
+                     * Ajoute les recettes trouver dans la liste de résultat qui est affiché
+                     */
                     @Override
                     @EverythingIsNonNull
                     public void onResponse(Call<SearchResults> call,
@@ -133,6 +175,9 @@ public class ResultActivity extends AppCompatActivity {
                         }
                     }
 
+                    /**
+                     * En cas d'échec on affiche un toast pour dire qu'il y a eu un problème
+                     */
                     @Override
                     @EverythingIsNonNull
                     public void onFailure(Call<SearchResults> call, Throwable t) {
@@ -142,6 +187,11 @@ public class ResultActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     *
+     * Fonction qui ferme l'activité courante si le boutton home est sélectionné
+     * @param item button se trouvant dans la bar de status
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

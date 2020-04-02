@@ -1,5 +1,5 @@
 
-package com.simoncorp.spoonacular_browser.api;
+package com.simoncorp.spoonacular_browser.repositories.model.search;
 
 import android.os.Parcel;
 import android.os.Parcelable;

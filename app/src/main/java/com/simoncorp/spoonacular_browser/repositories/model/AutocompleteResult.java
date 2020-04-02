@@ -1,5 +1,5 @@
 
-package com.simoncorp.spoonacular_browser.api;
+package com.simoncorp.spoonacular_browser.repositories.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
